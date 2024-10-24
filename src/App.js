@@ -4,27 +4,35 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { Login, Home, NotFound, PrivateRoute } from "./components";
+import {
+  Login,
+  Home,
+  NotFound,
+  PrivateRoute,
+  GlobalProvider,
+} from "./components";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
+      <GlobalProvider>
+        <Routes>
+          <Route path="/login" element={<Login />} />
 
-        <Route
-          path="/home"
-          element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
+          <Route
+            path="/home"
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
 
-        <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/" element={<Navigate to="/login" />} />
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </GlobalProvider>
     </Router>
   );
 }
