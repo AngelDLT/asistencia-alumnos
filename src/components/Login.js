@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import { useAxios } from "../AxiosContext";
+import { GlobalContext } from "./GlobalProvider";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { setLogUser } = useContext(GlobalContext);
   const API = useAxios();
   const initialValues = {
     email: "",
@@ -27,11 +31,13 @@ const Login = () => {
         Email: email,
         Contrasena: password,
       });
+      setLogUser(response.data.usuario); // Guardar el usuario en el estado global
       const token = response.data.token;
       localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(response.data.usuario));
       console.log("Login exitoso");
       resetForm();
-      window.location.href = "/home";
+      navigate("/home");
     } catch (error) {
       console.error("Error al hacer login:", error);
     } finally {
