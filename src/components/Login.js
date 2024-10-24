@@ -97,7 +97,7 @@ const Login = () => {
               type="submit"
               disabled={isSubmitting}
             >
-              Iniciar Sesión
+              Iniciar Sesión|
             </Button>
           </Form>
         )}
