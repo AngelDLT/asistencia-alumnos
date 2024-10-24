@@ -4,7 +4,7 @@ import axios from "axios";
 const AxiosContext = createContext();
 
 const API = axios.create({
-  baseURL: "https://tu-urlbase.com/api",
+  baseURL: "http://localhost:3000",
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",

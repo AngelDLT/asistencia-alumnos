@@ -22,7 +22,11 @@ const Login = () => {
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      const response = await API.post("/login", values);
+      const { email, password } = values;
+      const response = await API.post("/usuarios/login", {
+        Email: email,
+        Contrasena: password,
+      });
       const token = response.data.token;
       localStorage.setItem("token", token);
       console.log("Login exitoso");
